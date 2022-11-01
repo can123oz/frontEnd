@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ProductResponseModel } from '../models/productResponseModel';
+import { ListResponseModel } from '../models/listResponseModel';
+import { Product } from '../models/product';
 
 @Injectable({
   providedIn: 'root'
@@ -9,12 +10,24 @@ import { ProductResponseModel } from '../models/productResponseModel';
 export class ProductService {
 
   
-  apiUrl:string = "https://localhost:44372/api/products";
+  apiUrl:string = "https://localhost:44372/api/";
+
+  //apiUrlProductsByCategory:string = "https://localhost:44372/api/Products/GetByCategoryId/";
+  
   constructor(private httpClient:HttpClient) { }
 
-  getProducts():Observable<ProductResponseModel> {
-    return this.httpClient.get<ProductResponseModel>(this.apiUrl);
+  getProducts():Observable<ListResponseModel<Product>> {
+    let newPath : string = this.apiUrl + "products";
+    return this.httpClient.get<ListResponseModel<Product>>(newPath);
   }    
 
-  
+  getProductsByCategory(categoryId : Number):Observable<ListResponseModel<Product>> {
+    console.log("deneme : ", categoryId);
+    let newPath : string = this.apiUrl + "products/GetByCategoryId?categoryId="+categoryId;
+    console.log(newPath);
+    return this.httpClient.get<ListResponseModel<Product>>(newPath);
+  }
+
+
+
 }

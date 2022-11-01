@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Category } from 'src/app/models/category';
 import { Product } from 'src/app/models/product';
-import { ProductResponseModel } from 'src/app/models/productResponseModel';
 import { ProductService } from 'src/app/service/product.service';
 
 @Component({
@@ -13,10 +14,18 @@ export class ProductComponent implements OnInit {
   products : Product[] = [];
   dataLoaded = false;
   
-  constructor(private productService:ProductService) {  }
+  constructor(private productService:ProductService, private activatedRoute : ActivatedRoute) {  }
 
   ngOnInit(): void {
-    this.getProducts();
+    this.activatedRoute.params.subscribe(params => {
+      if (params["categoryId"]) {
+        console.log("ngoninit",params["categoryId"]);
+        this.getProductsByCategory(params["categoryId"]);
+      } else {
+        this.getProducts();
+      }
+    });
+    
   }
   
   getProducts(){
@@ -27,6 +36,14 @@ export class ProductComponent implements OnInit {
       console.log("api request bitti");
     });
     console.log("method bitti");
+  }
+
+  getProductsByCategory(categoryId : number) {
+    console.log("component.ts id : " , categoryId);
+    this.productService.getProductsByCategory(categoryId).subscribe(response => {
+      this.products = response.data;
+      this.dataLoaded = true;
+    });
   }
 
 } 

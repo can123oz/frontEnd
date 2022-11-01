@@ -1,7 +1,10 @@
-import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
-import { Catergory } from 'src/app/models/category';
-import { CategoryResponseModel } from 'src/app/models/categoryResponseModel';
+import { Component, Input, OnInit } from '@angular/core';
+import { timeInterval } from 'rxjs';
+import { Category } from 'src/app/models/category';
+import { ListResponseModel } from 'src/app/models/listResponseModel';
+import { Product } from 'src/app/models/product';
+import { CategoryService } from 'src/app/service/category.service';
+import { ProductService } from 'src/app/service/product.service';
 
 @Component({
   selector: 'app-category',
@@ -10,21 +13,39 @@ import { CategoryResponseModel } from 'src/app/models/categoryResponseModel';
 })
 export class CategoryComponent implements OnInit {
 
-  categories: Catergory[] = [];
-  apiUrl:string = "https://localhost:44372/api/category";
+  categories: Category[] = [];
+  currentCategory:Category = { categoryId:0, categoryName:""};
+  products: Product[] = [];
+
   
-  constructor(private httpClient:HttpClient) { }
+
+  constructor(private categoryService:CategoryService) { }
 
   ngOnInit(): void {
-    this.getCategory();
+    this.getAllCategory();
   }
 
-  getCategory() {
-    this.httpClient
-    .get<CategoryResponseModel>(this.apiUrl)
-    .subscribe( response => {
+  getAllCategory() {
+    this.categoryService.getAll().subscribe( response => {
       this.categories = response.data;
     })
+  }
+
+  setCurrentCategory(category : Category) {
+    console.log(category);
+    //this.productSerive.getProductsByCategory(category.categoryId).subscribe( response => {
+    //  this.products = response.data;
+    //});
+    console.log(this.products);
+    this.currentCategory = category;
+  }
+
+  getCurrentCategory(category:Category) {
+    if(category == this.currentCategory) {
+      return "list-group-item active";
+    } else {
+      return "list-group-item";
+    }
   }
 
 }

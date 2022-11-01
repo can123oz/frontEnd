@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Category } from './models/category';
 
 @Component({
   selector: 'app-root',
@@ -8,6 +9,6 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title: string = 'frontend';
 
-
+  selectedCategory : Category
 
 }
