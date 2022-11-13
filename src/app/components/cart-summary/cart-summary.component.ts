@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CartItem } from 'src/app/models/cartItem';
 import { CartService } from 'src/app/service/cart.service';
+import { ToastrService } from 'ngx-toastr';
+import { Product } from 'src/app/models/product';
 
 @Component({
   selector: 'app-cart-summary',
@@ -11,7 +13,7 @@ export class CartSummaryComponent implements OnInit {
 
   cartItems:CartItem[];
 
-  constructor(private cartService:CartService) { }
+  constructor(private cartService:CartService, private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.getCart();
@@ -20,7 +22,8 @@ export class CartSummaryComponent implements OnInit {
     this.cartItems = this.cartService.listCart();
   }
 
-  deleteItem(productId : number) {
-    this.cartService.deleteCartItem(productId);
+  deleteItem(product:Product) {
+    this.cartService.deleteCartItem(product.productId);
+    this.toastr.error("Deleted From Cart",product.productName);
   }
 }
