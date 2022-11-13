@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Product } from 'src/app/models/product';
 import { ProductService } from 'src/app/service/product.service';
+import { ToastrService } from 'ngx-toastr';
+import { CartService } from 'src/app/service/cart.service';
+
 
 @Component({
   selector: 'app-product',
@@ -15,7 +18,8 @@ export class ProductComponent implements OnInit {
   filterText :string = "";
   filterStatus :Boolean = false;
 
-  constructor(private productService:ProductService, private activatedRoute : ActivatedRoute) {  }
+  constructor(private productService:ProductService, private activatedRoute : ActivatedRoute, 
+    private toastr: ToastrService, private cartService : CartService) {  }
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(params => {
@@ -28,17 +32,6 @@ export class ProductComponent implements OnInit {
       }
     });
     
-  }
-  
-  checksIfArrayHasIt(index:string) : Boolean {
-    let newArray: Product[] = this.products.filter(params => params.productName.toLocaleLowerCase() === index.toLocaleLowerCase());  
-    console.log(newArray);
-    if (newArray.length > 0) {
-      this.filterStatus == true;
-      return true;
-    } else {
-      return false;
-    }
   }
 
   getProducts(){
@@ -59,9 +52,10 @@ export class ProductComponent implements OnInit {
     });
   }
 
-  addToCart(product:Product) : Boolean {
-    console.log(product);
-    return true;
+  addToCart(product:Product) {
+    this.toastr.success("Added to Cart", product.productName);
+    this.cartService.addToCart(product);
+    console.log("product addded to cart ", product);
   }
 
 } 
