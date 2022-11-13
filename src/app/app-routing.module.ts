@@ -11,7 +11,7 @@ const routes: Routes = [
   },
   {
     path:"products/category/:categoryId", component:ProductComponent
-  }
+  },
 ];
 
 @NgModule({
