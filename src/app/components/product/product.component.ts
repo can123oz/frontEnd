@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Category } from 'src/app/models/category';
 import { Product } from 'src/app/models/product';
 import { ProductService } from 'src/app/service/product.service';
 
@@ -13,11 +12,14 @@ export class ProductComponent implements OnInit {
 
   products : Product[] = [];
   dataLoaded = false;
-  
+  filterText :string = "";
+  filterStatus :Boolean = false;
+
   constructor(private productService:ProductService, private activatedRoute : ActivatedRoute) {  }
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(params => {
+      console.log("params: ", params);
       if (params["categoryId"]) {
         console.log("ngoninit",params["categoryId"]);
         this.getProductsByCategory(params["categoryId"]);
@@ -28,6 +30,17 @@ export class ProductComponent implements OnInit {
     
   }
   
+  checksIfArrayHasIt(index:string) : Boolean {
+    let newArray: Product[] = this.products.filter(params => params.productName.toLocaleLowerCase() === index.toLocaleLowerCase());  
+    console.log(newArray);
+    if (newArray.length > 0) {
+      this.filterStatus == true;
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   getProducts(){
     console.log("api request basladı");
     this.productService.getProducts().subscribe(response => {
@@ -44,6 +57,11 @@ export class ProductComponent implements OnInit {
       this.products = response.data;
       this.dataLoaded = true;
     });
+  }
+
+  addToCart(product:Product) : Boolean {
+    console.log(product);
+    return true;
   }
 
 } 
