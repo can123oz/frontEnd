@@ -9,9 +9,7 @@ import { Product } from '../models/product';
 })
 export class CartService {
 
-  apiUrl:string = "https://localhost:44372/api/";
-
-  constructor(private httpClient:HttpClient) { }
+  constructor() { }
 
   addToCart(product:Product) {
     let item = CartItems.find(c => c.product.productId === product.productId);

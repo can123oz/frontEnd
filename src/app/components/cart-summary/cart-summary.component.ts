@@ -26,4 +26,5 @@ export class CartSummaryComponent implements OnInit {
     this.cartService.deleteCartItem(product.productId);
     this.toastr.error("Deleted From Cart",product.productName);
   }
+
 }

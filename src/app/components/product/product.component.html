@@ -6,7 +6,6 @@
     <label for="filterText" class="form-label">Product Search</label>
     <input type="text" [(ngModel)]="filterText" class="form-control" id="filterText" placeholder="Search">
 </div>
-
 <div class="alert alert-success" *ngIf="filterText.length > 2 && filterStatus">
     {{filterText}} searched...
 </div>

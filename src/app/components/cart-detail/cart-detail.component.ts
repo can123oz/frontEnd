@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CartItem } from '../../models/cartItem';
 import { CartService } from 'src/app/service/cart.service';
+import { JsonPipe } from '@angular/common';
 
 
 @Component({
@@ -16,6 +17,7 @@ export class CartDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.CartItemForFor = this.cartService.listCart();
+    localStorage.setItem("son dmneme",JSON.stringify(this.CartItemForFor));
   }
 
 }
