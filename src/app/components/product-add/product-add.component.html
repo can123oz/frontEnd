@@ -3,13 +3,29 @@
         <div class="card">
             <div class="card-header">
                 <h5 class="title">Product Add</h5>
-                <div class="card-body">
-                    <form [formGroup]="productAddForm">
-                        <div class="form-group">
-                            
-                        </div>
-                    </form>
-                </div>
+            </div>
+            <div class="card-body">
+                <form [formGroup]="productAddForm">
+                    <div class="form-group">
+                        <label for="productName">Product Name</label>
+                        <input type="text" id="productName" class="form-control" formControlName="productName" placeholder="Product Name" />
+                    </div>
+                    <div class="form-group">
+                        <label for="categoryId">Category Id</label>
+                        <input type="number" id="categoryId" class="form-control" formControlName="categoryId" placeholder="Category Id" />
+                    </div>
+                    <div class="form-group">
+                        <label for="unitsInStock">Stocks</label>
+                        <input type="number" id="unitsInStock" class="form-control" formControlName="unitsInStock" placeholder="Stocks" />
+                    </div>
+                    <div class="form-group">
+                        <label for="unitPrice">Price</label>
+                        <input type="number" id="unitPrice" class="form-control" formControlName="unitPrice" placeholder="Price" />
+                    </div>
+                    <div class="card-footer mt-3">
+                        <button (click)="addProduct()" class="btn btn-secondary">Add Product</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
