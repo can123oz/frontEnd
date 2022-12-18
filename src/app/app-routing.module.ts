@@ -1,8 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CartDetailComponent } from './components/cart-detail/cart-detail.component';
+import { LoginComponent } from './components/login/login.component';
 import { ProductAddComponent } from './components/product-add/product-add.component';
 import { ProductComponent } from './components/product/product.component';
+import { LoginGuard } from './guards/login.guard';
 
 const routes: Routes = [
   {
@@ -18,7 +20,10 @@ const routes: Routes = [
     path:"cart", component:CartDetailComponent
   },
   {
-    path:"products/add", component:ProductAddComponent
+    path:"products/add", component:ProductAddComponent, canActivate:[LoginGuard]
+  },
+  {
+    path:"login", component:LoginComponent
   }
 ];
 

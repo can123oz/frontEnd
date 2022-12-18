@@ -15,7 +15,7 @@ export class ProductAddComponent implements OnInit {
   constructor(private formBuilder : FormBuilder, private productService:ProductService,
     private toastr: ToastrService) { }
 
-  productToAdd:Product;
+  //productToAdd:Product;
   productAddForm : FormGroup;
 
   ngOnInit(): void {  
@@ -45,7 +45,6 @@ export class ProductAddComponent implements OnInit {
             console.log(index.ErrorMessage);
             this.toastr.error("Validation Error",index.ErrorMessage);
           });
-
         }
       });
     } else {
