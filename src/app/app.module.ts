@@ -17,6 +17,7 @@ import { CartDetailComponent } from './components/cart-detail/cart-detail.compon
 import { ProductAddComponent } from './components/product-add/product-add.component';
 import { LoginComponent } from './components/login/login.component';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
+import { ProductUpdateComponent } from './components/product-update/product-update.component';
 
 
 @NgModule({
@@ -31,6 +32,7 @@ import { AuthInterceptor } from './interceptors/auth.interceptor';
     CartDetailComponent,
     ProductAddComponent,
     LoginComponent,
+    ProductUpdateComponent,
   ],
   imports: [
     BrowserModule,

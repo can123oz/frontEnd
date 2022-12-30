@@ -1,3 +1,7 @@
+<!-- <div *ngIf="productBool">
+    <app-product-update [productToUpdate]="selectedProduct" [deneme2]="deneme"></app-product-update>
+</div> -->
+
 <div *ngIf="!dataLoaded" class="spinner-border" role="status">
     <span class="visually-hidden">Loading...</span>
 </div>
@@ -24,10 +28,11 @@
                 <th>Vat Price</th>
                 <th>Stock </th>
                 <th></th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let product of products | filterPipe:filterText">
+            <tr *ngFor="let product of products | filterPipe:filterText" (click)="update(product)">
                 <td>{{product.productId}}</td>
                 <td>{{product.productName |uppercase }}</td>
                 <td>{{product.categoryId}}</td>
@@ -35,6 +40,7 @@
                 <td>{{product.unitPrice  |vatAdded:18 }}</td>
                 <td>{{product.unitsInStock}}</td>
                 <td><button (click)="addToCart(product)" type="button" class="btn btn-secondary">Add</button></td>
+                <td><button routerLink="products/update/{{product.productId}}" type="button" class="btn btn-secondary">Update</button></td>
             </tr>
         </tbody>
     </table>

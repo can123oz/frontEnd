@@ -2,7 +2,9 @@ import { ThisReceiver } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { tick } from '@angular/core/testing';
 import { FormGroup, FormControl, FormBuilder, Validators } from "@angular/forms";
+import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { first, map } from 'rxjs';
 import { LoginModel } from 'src/app/models/loginModel';
 import { LoginService } from 'src/app/service/login.service';
 
@@ -13,12 +15,17 @@ import { LoginService } from 'src/app/service/login.service';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private form : FormBuilder, private loginService : LoginService, private toestr : ToastrService) { }
+  constructor(private form : FormBuilder, private loginService : LoginService, private toestr : ToastrService, private route: ActivatedRoute) { }
 
   loginForm : FormGroup;
 
   ngOnInit(): void {
     this.createLoginForm();
+
+    this.route.paramMap.pipe(
+      map(() => window.history.state),
+      first()
+    ).subscribe((res) => console.log(res));
   }
 
   createLoginForm() {

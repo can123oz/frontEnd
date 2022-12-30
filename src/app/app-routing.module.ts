@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { CartDetailComponent } from './components/cart-detail/cart-detail.component';
 import { LoginComponent } from './components/login/login.component';
 import { ProductAddComponent } from './components/product-add/product-add.component';
+import { ProductUpdateComponent } from './components/product-update/product-update.component';
 import { ProductComponent } from './components/product/product.component';
 import { LoginGuard } from './guards/login.guard';
 
@@ -21,6 +22,9 @@ const routes: Routes = [
   },
   {
     path:"products/add", component:ProductAddComponent, canActivate:[LoginGuard]
+  },
+  {
+    path:"products/update/:id", component:ProductUpdateComponent
   },
   {
     path:"login", component:LoginComponent

@@ -1,0 +1,37 @@
+
+<div>
+    <button (click)="routingDeneme()">deneme Routing</button>
+</div>
+
+<div class="content mt-2">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="title">Product Update</h5>
+            </div>
+            <div class="card-body">
+                <form [formGroup]="productUpdateForm">
+                    <div class="form-group">
+                        <label for="productName">Product Name</label>
+                        <input type="text"  [value]="productToUpdate.productName" id="productName" class="form-control" formControlName="productName" placeholder="Product Name" />
+                    </div>
+                    <div class="form-group mt-2">
+                        <label for="categoryId">Category Id</label>
+                        <input type="number" id="categoryId" class="form-control" formControlName="categoryId" placeholder="Category Id" />
+                    </div>
+                    <div class="form-group mt-2">
+                        <label for="unitsInStock">Stocks</label>
+                        <input type="number" id="unitsInStock" class="form-control" formControlName="unitsInStock" placeholder="Stocks" />
+                    </div>
+                    <div class="form-group mt-2">
+                        <label for="unitPrice">Price</label>
+                        <input type="number" id="unitPrice" class="form-control" formControlName="unitPrice" placeholder="Price" />
+                    </div>
+                    <div class="card-footer mt-3">
+                        <button class="btn btn-secondary" (click)="updateProduct()">Update Product</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

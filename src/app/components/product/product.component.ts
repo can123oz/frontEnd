@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { Product } from 'src/app/models/product';
 import { ProductService } from 'src/app/service/product.service';
 import { ToastrService } from 'ngx-toastr';
@@ -17,31 +17,30 @@ export class ProductComponent implements OnInit {
   dataLoaded = false;
   filterText :string = "";
   filterStatus :Boolean = false;
+  productBool : Boolean = false;
+  selectedProduct : Product;
+  deneme: string ="deneme";
 
   constructor(private productService:ProductService, private activatedRoute : ActivatedRoute, 
-    private toastr: ToastrService, private cartService : CartService) {  }
+    private toastr: ToastrService, private cartService : CartService, private cdr:ChangeDetectorRef) {  }
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(params => {
-      console.log("params: ", params);
+      //console.log("params: ", params);
       if (params["categoryId"]) {
         console.log("ngoninit",params["categoryId"]);
         this.getProductsByCategory(params["categoryId"]);
       } else {
         this.getProducts();
       }
-    });
-    
+    });  
   }
 
   getProducts(){
-    console.log("api request basladı");
     this.productService.getProducts().subscribe(response => {
       this.products = response.data;
       this.dataLoaded = true;
-      console.log("api request bitti");
     });
-    console.log("method bitti");
   }
 
   getProductsByCategory(categoryId : number) {
@@ -58,4 +57,19 @@ export class ProductComponent implements OnInit {
     console.log("product addded to cart ", product);
   }
 
+  update(product : Product) {
+    this.cdr.detectChanges();
+    this.toastr.success(product.productName);
+    this.selectedProduct = product;
+    this.productBool = true;
+    console.log("parenttaki product: ",this.selectedProduct);
+  }
+
+  
+
+/*   sort() {
+    console.log("deneme");
+    this.products.sort((a:any,b:any) => b - a);
+  }
+ */
 } 

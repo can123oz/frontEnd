@@ -8,19 +8,19 @@
                 <form [formGroup]="productAddForm">
                     <div class="form-group">
                         <label for="productName">Product Name</label>
-                        <input type="text" id="productName" class="form-control" formControlName="productName" placeholder="Product Name" />
+                        <input type="text" class="form-control" formControlName="productName" placeholder="Product Name" />
                     </div>
                     <div class="form-group">
                         <label for="categoryId">Category Id</label>
-                        <input type="number" id="categoryId" class="form-control" formControlName="categoryId" placeholder="Category Id" />
+                        <input type="number" class="form-control" formControlName="categoryId" placeholder="Category Id" />
                     </div>
                     <div class="form-group">
                         <label for="unitsInStock">Stocks</label>
-                        <input type="number" id="unitsInStock" class="form-control" formControlName="unitsInStock" placeholder="Stocks" />
+                        <input type="number" class="form-control" formControlName="unitsInStock" placeholder="Stocks" />
                     </div>
                     <div class="form-group">
                         <label for="unitPrice">Price</label>
-                        <input type="number" id="unitPrice" class="form-control" formControlName="unitPrice" placeholder="Price" />
+                        <input type="number"  class="form-control" formControlName="unitPrice" placeholder="Price" />
                     </div>
                     <div class="card-footer mt-3">
                         <button (click)="addProduct()" class="btn btn-secondary">Add Product</button>
